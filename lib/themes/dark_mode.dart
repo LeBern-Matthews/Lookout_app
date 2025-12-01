@@ -10,10 +10,6 @@ ThemeData darkmode = ThemeData(
     onSurface: Colors.white,
     onPrimary: Colors.white,
     onSecondary: Colors.white,
-  ).copyWith(
-    brightness: Brightness.dark,
-    primary: const Color.fromRGBO(119, 147, 169, 1),
-    surface: const Color.fromRGBO(30, 30, 30, 1),
   ),
   scaffoldBackgroundColor: const Color.fromRGBO(18, 18, 18, 1),
   appBarTheme: const AppBarTheme(
@@ -45,8 +41,8 @@ ThemeData darkmode = ThemeData(
   ),
   navigationBarTheme: NavigationBarThemeData(
     backgroundColor: const Color.fromRGBO(30, 30, 30, 1),
-    indicatorColor: Colors.blue,
-    labelTextStyle: MaterialStateProperty.all(
+    indicatorColor: const Color.fromARGB(255, 9, 56, 94),
+    labelTextStyle: WidgetStateProperty.all(
       const TextStyle(color: Colors.white),
     ),
   ),

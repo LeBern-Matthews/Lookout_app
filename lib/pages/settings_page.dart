@@ -13,9 +13,9 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  bool _isCountryExpanded = false;
-  bool _isThemeExpanded = false;
-  String _selectedCountry = "Select a country"; // Add this variable
+  String _selectedCountry = "Select a country";
+  final ExpansibleController _themeController = ExpansibleController();
+  final ExpansibleController _countryController = ExpansibleController();
 
   @override
   Widget build(BuildContext context) {
@@ -30,67 +30,43 @@ class _SettingsPageState extends State<SettingsPage> {
           children: [
             SizedBox(height: 30),
             ExpansionTile(
+              controller: _themeController,
               title: const Text("Theme"),
               subtitle: const Text("Change the app theme"),
-              trailing: Icon(
-                _isThemeExpanded
-                    ? Icons.arrow_drop_up_rounded
-                    : Icons.arrow_drop_down_rounded,
-              ),
-              onExpansionChanged: (bool expanded) {
-                setState(() {
-                  _isThemeExpanded = expanded;
-                });
-              },
+              trailing: const Icon(Icons.arrow_drop_down_rounded),
               children: [
                 ListTile(
                   title: const Text("Light"),
                   leading: const Icon(Icons.light_mode),
                   onTap: () {
-                    // Get the ThemeProvider and set light theme
-                    Provider.of<ThemeProvider>(context, listen: false)
-                        .setTheme(lightmode);
-                    setState(() {
-                      _isThemeExpanded = false; // Close the expansion tile
-                    });
+                    Provider.of<ThemeProvider>(context, listen: false).setTheme(lightmode);
+                    _themeController.collapse();
                   },
                 ),
                 ListTile(
                   title: const Text("Dark"),
                   leading: const Icon(Icons.dark_mode),
                   onTap: () {
-                    // Get the ThemeProvider and set dark theme
-                    Provider.of<ThemeProvider>(context, listen: false)
-                        .setTheme(darkmode);
-                    setState(() {
-                      _isThemeExpanded = false; // Close the expansion tile
-                    });
+                    Provider.of<ThemeProvider>(context, listen: false).setTheme(darkmode);
+                    _themeController.collapse();
                   },
                 ),
               ],
             ),
             SizedBox(height: 30),
             ExpansionTile(
+              controller: _countryController,
               title: const Text("Country"),
               subtitle: Text(_selectedCountry),
-              trailing: Icon(
-                _isCountryExpanded
-                    ? Icons.arrow_drop_up_rounded
-                    : Icons.arrow_drop_down_rounded,
-              ),
-              onExpansionChanged: (bool expanded) {
-                setState(() {
-                  _isCountryExpanded = expanded;
-                });
-              },
+              trailing: const Icon(Icons.arrow_drop_down_rounded),
               children: countryOptions().map((country) {
                 return ListTile(
                   title: Text(country),
                   onTap: () {
                     setState(() {
                       _selectedCountry = country;
-                      _isCountryExpanded = false;
                     });
+                    _countryController.collapse();
                   },
                 );
               }).toList(),

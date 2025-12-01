@@ -48,8 +48,7 @@ class _EssentialChecklistPageState extends State<EssentialChecklistPage>
       appBar: AppBar(
         title: const Text("Essential Checklist"),
         centerTitle: false,
-        backgroundColor: Colors.blue[100],
-        iconTheme: const IconThemeData(color: Colors.white, size: 2),
+        backgroundColor:Theme.of(context).colorScheme.primary,
       ),
       body: Column(
         children: [
