@@ -14,6 +14,8 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
   String _selectedCountry = "Select a country";
+  String _selectedTheme ="Change the app theme";
+
   final ExpansibleController _themeController = ExpansibleController();
   final ExpansibleController _countryController = ExpansibleController();
 
@@ -32,13 +34,16 @@ class _SettingsPageState extends State<SettingsPage> {
             ExpansionTile(
               controller: _themeController,
               title: const Text("Theme"),
-              subtitle: const Text("Change the app theme"),
+              subtitle:  Text(_selectedTheme),
               trailing: const Icon(Icons.arrow_drop_down_rounded),
               children: [
                 ListTile(
                   title: const Text("Light"),
                   leading: const Icon(Icons.light_mode),
                   onTap: () {
+                    setState(() {
+                      _selectedTheme = "Light";
+                    });
                     Provider.of<ThemeProvider>(context, listen: false).setTheme(lightmode);
                     _themeController.collapse();
                   },
@@ -47,6 +52,9 @@ class _SettingsPageState extends State<SettingsPage> {
                   title: const Text("Dark"),
                   leading: const Icon(Icons.dark_mode),
                   onTap: () {
+                    setState(() {
+                      _selectedTheme = "Dark";
+                    });
                     Provider.of<ThemeProvider>(context, listen: false).setTheme(darkmode);
                     _themeController.collapse();
                   },
